@@ -1,0 +1,84 @@
+#eld_result_holder{
+	font: 13px/1.22 arial,helvetica,clean,sans-serif;
+	font-family: Arial;
+}
+
+.eld_currency_right{
+	text-align: right;
+    font-size: 14px;
+	float:right;
+}
+
+.eld_duration_currency_block{
+	margin-bottom: 20px;
+}
+
+.eld_domains_block table{
+	border-collapse: collapse;
+    border-spacing: 0;
+	border: 0px;
+	
+}
+
+#eld_domains_table td{
+	border: 0px;
+}
+
+.eld_domains_table_row{
+	border-bottom: black 1px solid;
+	border-top: black 1px solid;
+}
+
+
+.eld_domain_name_radio{
+	font-size: 16px;
+    text-align: left;
+    font-weight: 700;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.eld_domain_available{
+	font-weight: 400;
+    font-size: 16px;
+    margin-left: 20px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.false{
+	color: #666666;
+}
+
+.true{
+	color: #53A501;
+}
+
+.row_hover:hover{
+	background-color: #B5D7F7;
+}
+
+.row_checked{
+	background-color: #7FC8FB;
+}
+
+.eld_domain_price_row{
+	text-align: right;
+	font-weight: 700; 
+    font-size: 14px;
+    margin-right: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.eld_price_box{
+	background: url("../img/price-background.png") no-repeat scroll 0 0 transparent;
+    padding: 6px 8px 5px 8px;
+    margin-right: 10px;
+    border-radius: 2px;
+}
+
+.eld_action_buttons{
+	text-align: right;
+}
+

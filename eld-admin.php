@@ -51,6 +51,8 @@
 
 
     function eld_domain_reseller_admin_init() {
+		//TODO добавить генерацию страниц для всех указанных регистраторов
+
         register_setting(
             'eld_domain_reseller_options',
             'eld_zone_by_registrator_enabled_option'
@@ -97,6 +99,43 @@
             'eld_domain_resseler_menu',
             'eld_zone_by_registrator_settings_section'
         );
+
+		global $REGISTRATORS;
+		
+		$main_currency = $REGISTRATORS[ ZONE_BY_REGISTRATOR_ID ]['main_currency'];
+        foreach ( $REGISTRATORS[ ZONE_BY_REGISTRATOR_ID ]['zones'] as $i => $zone ) {
+			$zone_id = str_replace( '.', '_', $zone );
+			$option_name = "eld_zone_by_registrator_{$zone_id}_zone_price_option";
+			$field_name = "eld_zone_by_registrator_{$zone_id}_zone_price_field";
+			
+			register_setting(
+							'eld_domain_reseller_options',
+							$option_name,
+							function( $input ) use ($field_name ) {
+								if ( isset($input[ $field_name ] ) ) {
+									$input[ $field_name ] = sanitize_user( $input[ $field_name ], true );
+								}
+
+								return $input;
+							}
+			);
+			
+			add_settings_field(
+							"eld_zone_by_registrator_{$zone}_zone_price_field",
+							"Цена домена в зоне $zone ($main_currency): ",
+							function () use ( $option_name, $field_name ) {
+								$options = get_option( $option_name );
+								$value = isset($options[ $field_name ]) ? $options[ $field_name ] : '';
+
+								$input_elem = <<<INE
+								<input id="$field_name" type="text" name="{$option_name}[{$field_name}]" required pattern="^\d+$" value="$value" title="только цифры" />
+INE;
+								echo $input_elem;
+							},
+							'eld_domain_resseler_menu',
+							'eld_zone_by_registrator_settings_section'
+        );
+		}
 
     }
 
