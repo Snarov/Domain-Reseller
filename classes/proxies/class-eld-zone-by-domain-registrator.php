@@ -34,6 +34,7 @@
         );
 		
 		private $registrator_client;
+		private $fictiveCallDone = false;
 		
 		public function __construct(){
 			$this->registrator_client = new Json_RPC_Client(ZONE_BY_REGISTRATOR_API_URL);
@@ -56,6 +57,14 @@
 		}
 		
 		public function check_domain_name( $name ) {
+			if ( ! $fictiveCallDone ){	//	так избавляемся от бага, при котором первая попытка соединения всегда неудачная
+				try{
+					$this->registrator_client->CheckDomain( ['domain' => self::sanitize_name( $name ) ] );
+				} catch ( Exception $e ) {} finally {
+					$this->fictiveCallDone = true;
+				}
+			}
+			
 			return $this->registrator_client->CheckDomain( ['domain' => self::sanitize_name( $name ) ] );
 		}
 		
